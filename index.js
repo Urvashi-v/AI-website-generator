@@ -1,29 +1,37 @@
 const fs = require('fs');
-const userPrompt = "A dark themed landing page for a coffee shop";
-const generateHTML = (description) => {
-  return `
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>AI Generated Site</title>
-        <style>
-            body { background: #1a1a1a; color: #f5f5f5; font-family: sans-serif; text-align: center; padding-top: 50px; }
-            .card { border: 2px solid #6f4e37; display: inline-block; padding: 20px; border-radius: 10px; }
-        </style>
-    </head>
-    <body>
-        <div class="card">
-            <h1>Welcome to the Coffee Shop</h1>
-            <p>Generated based on: ${description}</p>
-        </div>
-    </body>
-    </html>
-  `;
-};
+const userPrompt = require('prompt-sync')();
+console.log("HEY WELCOME TO THIS WEBSITE AND APP GENERATOR");
+const choice = userPrompt("What kind of website you wanna make?");
 
-const content = generateHTML(userPrompt);
+let themeColor = "#ffffff"; 
+let title = "My New Website";
 
-fs.writeFile('generated_site.html', content, (err) => {
-  if (err) throw err;
-  console.log('Success! Your AI-built website file has been created.');
-});
+if (choice.toLowerCase() === 'coffee') {
+    themeColor = "#6f4e37"; 
+    title = "The Morning Brew";
+} else if (choice.toLowerCase() === 'gym') {
+    themeColor = "#225f13"; 
+    title = "Iron Paradise Gym";
+}
+
+const htmlTemplate = `
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: ${themeColor}; color: white; font-family: sans-serif; text-align: center; }
+        .container { margin-top: 100px; padding: 50px; border: 5px solid white; display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>${title}</h1>
+        <p>This site was built by your AI Script because you typed: ${choice}</p>
+    </div>
+</body>
+</html>
+`;
+
+fs.writeFileSync('generated_site.html', htmlTemplate);
+console.log("--------------------------------------------");
+console.log("DONE! Open 'generated_site.html' to see the result.");
