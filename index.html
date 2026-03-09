@@ -3,61 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Daily Grind Coffee Shop</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>The Daily Grind Coffee Co.</title>
+    <link rel="icon" href="https://via.placeholder.com/32/A0522D/FFFFFF?text=☕" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-dark: #3D2C20;
-            --secondary-light: #E8D8C4;
-            --accent-coffee: #A0522D;
-            --text-color: #333;
-            --bg-light: #F8F4EF;
-            --font-heading: 'Merriweather', serif;
-            --font-body: 'Open Sans', sans-serif;
+            --primary-color: #4A2C2A; /* Dark Coffee */
+            --secondary-color: #A0522D; /* Sienna */
+            --accent-color: #D2B48C; /* Tan */
+            --light-color: #F5F5DC; /* Beige */
+            --text-dark: #333;
+            --text-light: #fff;
         }
 
-        /* Base Styles */
-        body {
-            font-family: var(--font-body);
-            line-height: 1.6;
+        * {
             margin: 0;
             padding: 0;
-            background-color: var(--bg-light);
-            color: var(--text-color);
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-color);
             scroll-behavior: smooth;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 1100px;
+            margin: auto;
+            overflow: hidden;
             padding: 0 20px;
-        }
-
-        h1, h2, h3 {
-            font-family: var(--font-heading);
-            color: var(--primary-dark);
-            margin-bottom: 0.8em;
-        }
-
-        h1 { font-size: 3em; }
-        h2 { font-size: 2.5em; }
-        h3 { font-size: 1.8em; }
-
-        a {
-            color: var(--accent-coffee);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
         }
 
         /* Header */
         header {
-            background-color: var(--primary-dark);
-            color: var(--secondary-light);
+            background: var(--primary-color);
+            color: var(--text-light);
             padding: 1rem 0;
             position: sticky;
             top: 0;
@@ -71,284 +54,308 @@
             align-items: center;
         }
 
-        .logo {
-            font-family: var(--font-heading);
-            font-size: 1.8em;
-            font-weight: 700;
-            color: var(--secondary-light);
+        header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        header h1 a {
+            color: var(--text-light);
+            text-decoration: none;
         }
 
         nav ul {
             list-style: none;
-            margin: 0;
-            padding: 0;
             display: flex;
         }
 
-        nav li {
+        nav ul li {
             margin-left: 25px;
         }
 
-        nav a {
-            color: var(--secondary-light);
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
             font-weight: 600;
-            transition: color 0.3s ease;
-            text-transform: uppercase;
+            padding: 5px 0;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
         }
 
-        nav a:hover {
-            color: var(--accent-coffee);
-            text-decoration: none;
+        nav ul li a:hover {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
         }
 
         /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1511920170033-f8396924c348?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcwMDV8MHwxfHNlYXJjaHwxNXx8Y29mZmVlJTIwc2hvcCUyMGludGVyaW9yfGVufDB8fHx8MTcwMDQ1ODU4M3ww&ixlib=rb-4.0.3&q=80&w=1080') no-repeat center center/cover;
-            height: 600px;
+        #hero {
+            background: url('https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80') no-repeat center center/cover;
+            height: 80vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: #fff;
+            color: var(--text-light);
             position: relative;
         }
 
-        .hero-content {
-            max-width: 800px;
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Overlay for readability */
         }
 
-        .hero h1 {
-            font-size: 4.5em;
-            margin-bottom: 0.3em;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        #hero * {
+            position: relative;
+            z-index: 1;
         }
 
-        .hero p {
-            font-size: 1.5em;
-            margin-bottom: 2em;
-            color: #f0f0f0;
+        #hero h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
         }
 
-        .button {
+        #hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .btn {
             display: inline-block;
-            background-color: var(--accent-coffee);
-            color: #fff;
-            padding: 15px 30px;
+            background: var(--secondary-color);
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            text-decoration: none;
             border-radius: 5px;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
-        .button:hover {
-            background-color: darken(var(--accent-coffee), 10%);
+        .btn:hover {
+            background: var(--accent-color);
             transform: translateY(-2px);
-            text-decoration: none;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
         }
 
-        /* Section Styles */
+        /* Sections */
         section {
-            padding: 80px 0;
+            padding: 4rem 0;
             text-align: center;
         }
 
-        section:nth-of-type(even) {
-            background-color: var(--secondary-light);
-        }
-
-        /* About Us */
-        .about-us p {
-            max-width: 800px;
-            margin: 1.5em auto;
-            font-size: 1.1em;
-            color: var(--text-color);
+        section h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 3rem;
+            margin-bottom: 2.5rem;
+            color: var(--primary-color);
         }
 
         /* Menu Section */
-        .menu-section {
-            background-color: var(--bg-light);
+        #menu {
+            background-color: var(--light-color);
         }
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 3em;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
         }
 
         .menu-item {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            background: var(--text-light);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-align: left;
-            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .menu-item:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .menu-item img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            height: 180px;
+            object-fit: cover;
+            width: 100%;
         }
 
         .menu-item h3 {
-            color: var(--accent-coffee);
-            margin-top: 0;
-            font-size: 1.6em;
+            font-family: 'Merriweather', serif;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
         }
 
         .menu-item p {
-            font-size: 0.95em;
-            color: #555;
-            margin-bottom: 1em;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
         }
 
-        .menu-item span {
-            font-weight: 700;
-            color: var(--primary-dark);
-            font-size: 1.2em;
+        .menu-item .price {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        /* Gallery Section */
-        .gallery-section {
-            background-color: var(--secondary-light);
+        /* About Section */
+        #about {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 5rem 0;
         }
 
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 3em;
+        #about p {
+            max-width: 800px;
+            margin: auto;
+            font-size: 1.2rem;
+            line-height: 1.8;
         }
-
-        .gallery-item {
-            height: 250px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.03);
-        }
-
-        /* Placeholder images for gallery */
-        .item-1 { background-image: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcwMDV8MHwxfHNlYXJjaHwyMHx8Y29mZmVlJTIwY3VwfGVufDB8fHx8MTcwMDQ1ODU4M3ww&ixlib=rb-4.0.3&q=80&w=600'); }
-        .item-2 { background-image: url('https://images.unsplash.com/photo-1497935586351-b67a49e01751?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcwMDV8MHwxfHNlYXJjaHwxOHx8Y29mZmVlJTIwYmVhbnN8ZW58MHx8fHwxNzAwNDU4NTgzfDA&ixlib=rb-4.0.3&q=80&w=600'); }
-        .item-3 { background-image: url('https://images.unsplash.com/photo-1504624446450-48866e4a2118?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcwMDV8MHwxfHNlYXJjaHwyfHxjYWZlJTIwaW50ZXJpb3J8ZW58MHx8fHwxNzAwNDU4ODcxfDA&ixlib=rb-4.0.3&q=80&w=600'); }
-        .item-4 { background-image: url('https://images.unsplash.com/photo-1541167760496-1057c7d42571?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcwMDV8MHwxfHNlYXJjaHwxMnx8YmFyaXN0YSUyMG1ha2luZyUyMGNvZmZlZXxlbnwwfHx8fDE3MDA0NTg4NzF8MA&ixlib=rb-4.0.3&q=80&w=600'); }
-
 
         /* Contact Section */
-        .contact-section {
-            background-color: var(--bg-light);
+        #contact {
+            background-color: var(--primary-color);
+            color: var(--text-light);
         }
 
-        .contact-section p {
-            font-size: 1.1em;
-            margin-bottom: 0.5em;
-            color: var(--text-color);
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 3rem;
         }
 
-        .map-placeholder {
-            margin: 40px auto;
-            max-width: 800px;
-            height: 400px; /* Adjust height as needed */
-            background-color: #e0e0e0;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        .contact-item {
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-align: center;
         }
 
-        .map-placeholder iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
+        .contact-item h3 {
+            font-family: 'Merriweather', serif;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .contact-item p {
+            margin-bottom: 0.7rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item a {
+            color: var(--light-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--secondary-color);
         }
 
         /* Footer */
         footer {
-            background-color: var(--primary-dark);
-            color: var(--secondary-light);
+            background: var(--primary-color);
+            color: var(--text-light);
             text-align: center;
-            padding: 30px 0;
-            font-size: 0.9em;
+            padding: 1.5rem 0;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--secondary-color);
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             header .container {
                 flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: 1rem;
             }
 
             nav ul {
-                margin-top: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
+                flex-direction: column;
             }
 
-            nav li {
-                margin: 0 10px 10px 10px;
+            nav ul li {
+                margin: 10px 0;
             }
 
-            .hero {
-                height: 450px;
+            #hero h2 {
+                font-size: 3rem;
             }
 
-            .hero h1 {
-                font-size: 3em;
+            #hero p {
+                font-size: 1.2rem;
             }
 
-            .hero p {
-                font-size: 1.2em;
+            section h2 {
+                font-size: 2.5rem;
             }
 
-            h1 { font-size: 2.5em; }
-            h2 { font-size: 2em; }
-            h3 { font-size: 1.5em; }
-
-            section {
-                padding: 60px 0;
-            }
-
-            .menu-grid, .gallery-grid {
+            .menu-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
             }
         }
 
         @media (max-width: 480px) {
-            .logo {
-                font-size: 1.5em;
+            #hero h2 {
+                font-size: 2.5rem;
             }
 
-            nav li {
-                margin: 0 8px 8px 8px;
+            #hero p {
+                font-size: 1rem;
             }
 
-            .hero {
-                height: 350px;
+            .btn {
+                padding: 0.8rem 1.5rem;
             }
 
-            .hero h1 {
-                font-size: 2.2em;
+            section h2 {
+                font-size: 2rem;
             }
 
-            .hero p {
-                font-size: 1em;
-            }
-
-            .button {
-                padding: 12px 25px;
-            }
-
-            h1 { font-size: 2em; }
-            h2 { font-size: 1.7em; }
-            h3 { font-size: 1.3em; }
-
-            .map-placeholder {
-                height: 300px;
+            .menu-item .price {
+                font-size: 1.2rem;
+                bottom: 15px;
+                right: 15px;
             }
         }
     </style>
@@ -356,13 +363,12 @@
 <body>
     <header>
         <div class="container">
-            <div class="logo">The Daily Grind</div>
+            <h1><a href="#hero">The Daily Grind</a></h1>
             <nav>
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="#hero">Home</a></li>
                     <li><a href="#menu">Menu</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -370,99 +376,96 @@
     </header>
 
     <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Taste the Perfect Brew</h1>
-                <p>Your daily dose of exceptional coffee and comfort.</p>
-                <a href="#menu" class="button">Explore Our Menu</a>
-            </div>
+        <section id="hero">
+            <h2>Your Daily Ritual Starts Here</h2>
+            <p>Experience the finest handcrafted coffee and delicious pastries.</p>
+            <a href="#menu" class="btn">View Our Menu</a>
         </section>
 
-        <section id="about" class="container about-us">
-            <h2>Our Story</h2>
-            <p>Welcome to The Daily Grind, where passion meets perfection in every cup. Established in 2023, we've dedicated ourselves to sourcing the finest beans from around the globe, ensuring a rich and authentic coffee experience for our community. Our cozy atmosphere and friendly baristas make us the perfect spot for your morning ritual, a midday break, or an evening gathering.</p>
-            <p>From classic espressos to unique seasonal lattes, we craft each drink with care and precision. Come in, relax, and let us elevate your coffee journey.</p>
-        </section>
-
-        <section id="menu" class="menu-section">
+        <section id="menu">
             <div class="container">
                 <h2>Our Delicious Menu</h2>
                 <div class="menu-grid">
                     <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1541167760492-f04b19318a44?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Espresso">
                         <h3>Espresso</h3>
-                        <p>Rich, concentrated shot of pure coffee essence.</p>
-                        <span>$3.00</span>
+                        <p>A concentrated shot of rich, aromatic coffee, perfect for a quick boost.</p>
+                        <span class="price">$3.00</span>
                     </div>
                     <div class="menu-item">
-                        <h3>Latte</h3>
+                        <img src="https://images.unsplash.com/photo-1572230113115-ff553609eb12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Latte">
+                        <h3>Café Latte</h3>
                         <p>Smooth espresso with steamed milk and a thin layer of foam.</p>
-                        <span>$5.50</span>
+                        <span class="price">$4.50</span>
                     </div>
                     <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1517701540139-f53a479ff05f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Cappuccino">
                         <h3>Cappuccino</h3>
-                        <p>Equal parts espresso, steamed milk, and foamed milk.</p>
-                        <span>$5.00</span>
+                        <p>Equal parts espresso, steamed milk, and frothy milk foam.</p>
+                        <span class="price">$4.75</span>
                     </div>
                     <div class="menu-item">
-                        <h3>Americano</h3>
-                        <p>Espresso shots diluted with hot water.</p>
-                        <span>$4.00</span>
+                        <img src="https://images.unsplash.com/photo-1507919934444-a6ddf609e2cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Croissant">
+                        <h3>Butter Croissant</h3>
+                        <p>Flaky, buttery, and baked to golden perfection. A classic treat.</p>
+                        <span class="price">$3.50</span>
                     </div>
                     <div class="menu-item">
-                        <h3>Cold Brew</h3>
-                        <p>Slow-steeped for a smooth, low-acid coffee concentrate.</p>
-                        <span>$5.25</span>
+                        <img src="https://images.unsplash.com/photo-1563214152-32b7194164b4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Muffin">
+                        <h3>Blueberry Muffin</h3>
+                        <p>Soft and moist muffin loaded with juicy blueberries.</p>
+                        <span class="price">$3.75</span>
                     </div>
                     <div class="menu-item">
-                        <h3>Mochaccino</h3>
-                        <p>Espresso, chocolate, steamed milk, and whipped cream.</p>
-                        <span>$6.00</span>
-                    </div>
-                    <div class="menu-item">
-                        <h3>Pastries</h3>
-                        <p>Freshly baked croissants, muffins, and cookies daily.</p>
-                        <span>Varies</span>
-                    </div>
-                    <div class="menu-item">
-                        <h3>Sandwiches</h3>
-                        <p>Light and fresh options for a quick bite.</p>
-                        <span>Varies</span>
+                        <img src="https://images.unsplash.com/photo-1587560875604-0ee216d63499?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Iced Coffee">
+                        <h3>Iced Coffee</h3>
+                        <p>Refreshing cold brew coffee served over ice.</p>
+                        <span class="price">$4.00</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="gallery" class="gallery-section">
+        <section id="about">
             <div class="container">
-                <h2>Our Ambiance</h2>
-                <div class="gallery-grid">
-                    <div class="gallery-item item-1"></div>
-                    <div class="gallery-item item-2"></div>
-                    <div class="gallery-item item-3"></div>
-                    <div class="gallery-item item-4"></div>
-                </div>
+                <h2>About Us</h2>
+                <p>
+                    The Daily Grind Coffee Co. was founded on a simple principle:
+                    great coffee should be accessible to everyone. We meticulously
+                    source the finest beans from sustainable farms around the globe,
+                    roast them to perfection, and craft each cup with passion and precision.
+                    Come in, relax, and let us be a part of your daily ritual.
+                </p>
             </div>
         </section>
 
-        <section id="contact" class="contact-section">
+        <section id="contact">
             <div class="container">
                 <h2>Visit Us</h2>
-                <p>123 Coffee Bean Lane, Brewville, CA 90210</p>
-                <p>Phone: (555) 123-4567</p>
-                <p>Email: info@thedailygrind.com</p>
-                <div class="map-placeholder">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0558100589133!2d-122.41941568468165!3d37.77492947975997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858088f11b22e7%3A0x6d8b4c7c8c8c8c8c!2sGolden%20Gate%20Bridge!5e0!3m2!1sen!2sus!4v1678888888888!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h3>Location</h3>
+                        <p>123 Coffee Bean Lane</p>
+                        <p>Brewtown, CA 90210</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Hours</h3>
+                        <p>Monday - Friday: 7 AM - 6 PM</p>
+                        <p>Saturday - Sunday: 8 AM - 5 PM</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Contact</h3>
+                        <p>Phone: <a href="tel:1234567890">(123) 456-7890</a></p>
+                        <p>Email: <a href="mailto:info@dailygrind.com">info@dailygrind.com</a></p>
+                    </div>
                 </div>
-                <h3>Hours:</h3>
-                <p>Monday - Friday: 7:00 AM - 7:00 PM</p>
-                <p>Saturday - Sunday: 8:00 AM - 6:00 PM</p>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2023 The Daily Grind Coffee Shop. All rights reserved.</p>
+            <p>&copy; 2023 The Daily Grind Coffee Co. All rights reserved.</p>
         </div>
     </footer>
 </body>
