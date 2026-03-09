@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cozy Bean - Your Daily Brew</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #F5EFEB; /* Light cream */
+            --secondary-bg: #EAE3D2; /* Slightly darker cream */
+            --dark-brown: #4F382A; /* Coffee brown */
+            --medium-brown: #8D6A4E; /* Caramel brown */
+            --light-brown: #BDA38E; /* Warm beige */
+            --text-color: #333333;
+            --accent-color: #A37F6C; /* Earthy accent */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--primary-bg);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-brown);
+            margin-bottom: 0.5em;
+        }
+
+        h1 { font-size: 3.5em; }
+        h2 { font-size: 2.5em; }
+        h3 { font-size: 1.8em; }
+
+        a {
+            text-decoration: none;
+            color: var(--medium-brown);
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--dark-brown);
+            color: var(--primary-bg);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: var(--primary-bg);
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--primary-bg);
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--light-brown);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 4.5em;
+            margin-bottom: 0.2em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 2em;
+            max-width: 700px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: 700;
+            font-size: 1.1em;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            background-color: var(--medium-brown);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--secondary-bg);
+        }
+
+        section h2 {
+            margin-bottom: 1.5em;
+            position: relative;
+            display: inline-block;
+        }
+        
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+
+        /* About Us */
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            text-align: left;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+        }
+
+        .about-text p {
+            margin-bottom: 1em;
+            font-size: 1.1em;
+        }
+
+        .about-image {
+            flex: 0 0 400px;
+            height: 300px;
+            background: url('https://images.unsplash.com/photo-1507914441553-6058e469550b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            border-radius: 8px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Menu Section */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .menu-item {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-item h3 {
+            color: var(--medium-brown);
+            margin-bottom: 0.5em;
+            font-size: 1.5em;
+        }
+
+        .menu-item .price {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--accent-color);
+            font-size: 1.3em;
+            float: right;
+        }
+
+        .menu-item p {
+            font-size: 0.95em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 50px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            text-align: left;
+        }
+
+        .contact-info, .contact-map {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+        }
+
+        .contact-info h3 {
+            color: var(--dark-brown);
+            margin-bottom: 1em;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.8em;
+            display: flex;
+            align-items: center;
+            font-size: 1.1em;
+        }
+
+        .contact-info p i {
+            color: var(--accent-color);
+            margin-right: 15px;
+            font-size: 1.3em;
+            width: 30px;
+            text-align: center;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 350px;
+            border: 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-brown);
+            color: var(--primary-bg);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            color: var(--primary-bg);
+            font-weight: bold;
+        }
+
+        .social-links a {
+            color: var(--primary-bg);
+            font-size: 1.8em;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--light-brown);
+        }
+
+        .footer-nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-nav ul li a {
+            color: var(--primary-bg);
+            font-weight: 300;
+        }
+
+        .footer-nav ul li a:hover {
+            color: var(--light-brown);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: rgba(245, 239, 235, 0.7);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3em;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+            }
+
+            header .container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 10px 10px;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-image {
+                width: 100%;
+                flex: none;
+            }
+
+            .menu-grid, .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            .contact-info, .contact-map {
+                width: 100%;
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .logo {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+
+            nav ul li {
+                margin: 0 8px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">The Cozy Bean</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h1>Experience the Perfect Brew</h1>
+            <p>At The Cozy Bean, we craft exceptional coffee moments just for you. Savor the aroma, taste the passion.</p>
+            <a href="#menu" class="btn">View Our Menu</a>
+        </section>
+
+        <section id="about" class="about-us">
+            <div class="container">
+                <h2>Our Story</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Welcome to The Cozy Bean, a labor of love born from a simple passion for great coffee and warm hospitality. Established in 2023, our aim was to create a sanctuary where friends, families, and solo explorers could unwind and enjoy meticulously crafted beverages.</p>
+                        <p>We source only the finest beans from sustainable farms around the world, roasting them to perfection right here. Every cup tells a story of dedication, from the bean to your delightful sip. Join us and become a part of our cozy community.</p>
+                    </div>
+                    <div class="about-image"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="menu">
+            <div class="container">
+                <h2>Our Delicious Offerings</h2>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <h3>Espresso <span class="price">$3.00</span></h3>
+                        <p>A shot of intense, rich coffee, the foundation of many drinks.</p>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Cappuccino <span class="price">$4.50</span></h3>
+                        <p>Espresso with steamed milk, topped with a deep layer of foam.</p>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Latte <span class="price">$4.75</span></h3>
+                        <p>Smooth espresso combined with steamed milk and a thin layer of foam.</p>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Americano <span class="price">$3.50</span></h3>
+                        <p>Espresso diluted with hot water, giving it a similar strength to drip coffee.</p>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Mocha <span class="price">$5.25</span></h3>
+                        <p>A delightful blend of espresso, chocolate syrup, steamed milk, and whipped cream.</p>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Cold Brew <span class="price">$5.00</span></h3>
+                        <p>Slow-steeped coffee concentrate, served over ice for a smooth, low-acid taste.</p>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Assorted Pastries <span class="price">from $3.00</span></h3>
+                        <p>Freshly baked croissants, muffins, cookies, and more.</p>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Signature Sandwich <span class="price">$8.50</span></h3>
+                        <p>Daily rotating selection of gourmet sandwiches on artisan bread.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="gallery">
+            <div class="container">
+                <h2>Moments at The Cozy Bean</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1559818861-c300b4679ef6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Coffee art latte"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Coffee beans and pour over"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1504631317-a06b12a8848d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Pastries on display"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517701764104-a55e090f23b7?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cozy cafe interior"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1541167760496-e137f6920f67?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Barista preparing coffee"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544787941-2c6b45a498cf?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Outdoor seating at cafe"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Visit Us</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Get in Touch</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Brew Lane, Coffeeville, CA 90210</p>
+                        <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                        <p><i class="fas fa-envelope"></i> info@thecozybean.com</p>
+                        <p><i class="fas fa-clock"></i> Mon - Fri: 7:00 AM - 6:00 PM</p>
+                        <p><i class="fas fa-clock"></i> Sat - Sun: 8:00 AM - 5:00 PM</p>
+                    </div>
+                    <div class="contact-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.227409224419!2d-122.41941568468165!3d37.7749297797587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808798d1a123%3A0x6a2c3e1e2c9e4c0!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2suk!4v1678901234567!5m2!1sen!2suk" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">The Cozy Bean</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <div class="footer-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <p class="copyright">&copy; 2023 The Cozy Bean. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
