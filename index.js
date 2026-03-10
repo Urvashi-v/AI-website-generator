@@ -33,15 +33,21 @@ async function buildApp() {
     Build a professional, interactive web project for: ${userRequest}.
     
     RULES:
-    1. You MUST provide exactly three files: 'index.html', 'style.css', and 'script.js'.
+    1. You MUST provide exactly four files: 'index.html', 'style.css', 'script.js' and 'server.js'
     2. 'index.html' must link to 'style.css' and 'script.js'.
     3. 'script.js' must contain the interactive logic (e.g., button clicks, form handling, or animations).
+    4. 'server.js': A Node.js/Express server using Mongoose to save data.
+    DATABASE LOGIC:
+    - In 'server.js', use 'process.env.MONGO_URI' for the connection string.
+    - Create a Schema that matches the data (e.g., Reactor calculations).
+    - Provide an API endpoint '/api/save' (POST) and '/api/history' (GET).
     4. Return ONLY a JSON object:
     {
       "files": [
         { "name": "index.html", "content": "..." },
         { "name": "style.css", "content": "..." },
-        { "name": "script.js", "content": "..." }
+        { "name": "script.js", "content": "..." },
+        { "name": "server.js", "content": "..." }
       ]
     }
     No explanations or markdown.
