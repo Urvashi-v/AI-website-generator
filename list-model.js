@@ -1,27 +1,33 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+require('dotenv').config();
 
-async function listModels() {
-    // 1. Initialize the client
-    const genAI = new GoogleGenerativeAI("AIzaSyBC4Bol7-zmyJFtmK9J_MKzhn5DSE3n0RE");
-
+async function checkModels() {
+    const apiKey = process.env.GEMINI_API_KEY;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`;
+    
     try {
-        // In the newest SDKs, listModels might be part of the main export 
-        // or require a direct REST call if the SDK method is deprecated.
-        // Let's try the direct REST method which is 100% foolproof:
-        const apiKey = "AIzaSyBC4Bol7-zmyJFtmK9J_MKzhn5DSE3n0RE";
-        const url = `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`;
-        
         const response = await fetch(url);
         const data = await response.json();
+        
+        // 1. Check for API Errors first
+        if (data.error) {
+            console.error("❌ Google API Error:", data.error.message);
+            console.log("Status:", data.error.status);
+            return;
+        }
 
-        console.log("--- YOUR ACCESSIBLE MODELS ---");
-        data.models.forEach(model => {
-            console.log(`> ${model.name.replace('models/', '')}`);
-        });
-
-    } catch (error) {
-        console.error("Still having trouble listing models:", error.message);
+        // 2. Check if 'models' actually exists in the response
+        if (data.models && Array.isArray(data.models)) {
+            console.log("--- YOUR ACCESSIBLE MODELS ---");
+            data.models.forEach(m => {
+                console.log(`> ${m.name.replace('models/', '')}`);
+            });
+        } else {
+            console.log("⚠️ No models found. Full Response:", JSON.stringify(data));
+        }
+    } catch (e) {
+        console.error("❌ System Error:", e.message);
     }
 }
 
-listModels();
+checkModels();

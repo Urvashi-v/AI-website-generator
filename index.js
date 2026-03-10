@@ -1,39 +1,69 @@
 require('dotenv').config();
 const fs = require('fs');
-const userPrompt = require('prompt-sync')();
-const { GoogleGenerativeAI } = require("@google/generative-ai"); 
+const prompt = require('prompt-sync')();
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const modelNames = ["gemini-2.5-flash", "gemini-1.5-pro", "gemini-pro"];
 
-// The rest of your code...
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+async function getAIResponse(userPrompt) {
+  for (let name of modelNames) {
+    try {
+      console.log(`Checking model: ${name}...`);
+      const model = genAI.getGenerativeModel({ model: name });
+      const result = await model.generateContent(userPrompt);
+      return result.response.text();
+    } 
+    catch (err) {
+      if (err.status === 503 || err.message.includes("503")) {
+      console.warn(`\n !! ${name} is busy. Trying next...!!`);
+      continue; 
+      }
+      throw err;
+    }
+  }
+  throw new Error("All AI models are busy. Try again in a minute.");
+}
 
 async function buildApp() {
-  console.log("WELCOME TO THE AI APP OR WEBSITE GENERATOR!! PLEASE LET US KNOW YOUR NEEDS...");
-  const userRequest = userPrompt("Please describe the kid of website you want to genereate...");
-
-  console.log("Thinking and generating a beautiful website for you !!");
+  console.log("WELCOME TO THE AUTO-WEBSITE GENERATOR");
+  const userRequest = prompt("How can I help ypu? ");
 
   const aiPrompt = `
-    You are an expert web developer. 
-    The user wants: ${userRequest}
-    Generate ONLY the code for a single-file 'index.html' including CSS. 
-    Do not include any explanations, just the code starting with <!DOCTYPE html>.
+    User wants: ${userRequest}
+    Return ONLY a JSON object with this structure:
+    {
+      "files": [
+      { "name": "index.html", "content": "..." },
+      { "name": "style.css", "content": "..." }
+      ]
+    }
+    Do not include markdown backticks or explanations.
+    CRITICAL: You are a headless API. You must output ONLY the JSON object. Any text before or after the JSON will break my system. Do not use markdown backticks.
   `;
 
   try {
-    const result = await model.generateContent(aiPrompt);
-    const code = result.response.text();
-    fs.writeFileSync('index.html', code);
-      console.log("--------------------------------------------");
-      console.log("DONE! Your AI has built the website.");
-      console.log("Open 'index.html' in your browser to see it!");
-    } 
-    
-    catch (error) {
-      console.error("Error talking to the AI:", error);
-  }
+    console.log("Architecting your files...");
+    const rawText = await getAIResponse(aiPrompt);
 
+    const jsonMatch = rawText.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) {
+        throw new Error("The AI didn't return a valid JSON object. Try rephrasing your prompt.");
+    }
+        
+    const cleanJSON = jsonMatch[0];
+    const project = JSON.parse(cleanJSON);
+
+    project.files.forEach(file => {
+    fs.writeFileSync(file.name, file.content);
+    console.log(`🛠️ Generated: ${file.name}`);
+    });
+
+    console.log("\n PROJECT READY! Check your folder for the new files.");
+  } 
+  catch (error) {
+    console.error("Build failed:", error.message);
+  }
 }
 
 buildApp();
