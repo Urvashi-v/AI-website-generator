@@ -30,15 +30,21 @@ async function buildApp() {
   const userRequest = prompt("How can I help ypu? ");
 
   const aiPrompt = `
-    User wants: ${userRequest}
-    Return ONLY a JSON object with this structure:
+    Build a professional, interactive web project for: ${userRequest}.
+    
+    RULES:
+    1. You MUST provide exactly three files: 'index.html', 'style.css', and 'script.js'.
+    2. 'index.html' must link to 'style.css' and 'script.js'.
+    3. 'script.js' must contain the interactive logic (e.g., button clicks, form handling, or animations).
+    4. Return ONLY a JSON object:
     {
       "files": [
-      { "name": "index.html", "content": "..." },
-      { "name": "style.css", "content": "..." }
+        { "name": "index.html", "content": "..." },
+        { "name": "style.css", "content": "..." },
+        { "name": "script.js", "content": "..." }
       ]
     }
-    Do not include markdown backticks or explanations.
+    No explanations or markdown.
     CRITICAL: You are a headless API. You must output ONLY the JSON object. Any text before or after the JSON will break my system. Do not use markdown backticks.
   `;
 
