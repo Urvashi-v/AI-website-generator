@@ -9,7 +9,6 @@ async function checkModels() {
         const response = await fetch(url);
         const data = await response.json();
         
-        // 1. Check for API Errors first
         if (data.error) {
             console.error("❌ Google API Error:", data.error.message);
             console.log("Status:", data.error.status);
