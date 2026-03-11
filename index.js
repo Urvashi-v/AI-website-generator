@@ -29,8 +29,27 @@ async function buildApp() {
   console.log("WELCOME TO THE AUTO-WEBSITE GENERATOR");
   const userRequest = prompt("How can I help ypu? ");
 
+  let existingCode = "";
+  if (fs.existsSync('index.html')) {
+    existingCode = fs.readFileSync('index.html', 'utf8');
+}
+
   const aiPrompt = `
     Build a professional, interactive web project for: ${userRequest}.
+    You are an Iterative Web Editor.
+    EXISTING CODE: 
+    ${existingCode || "None (starting fresh)"}
+    
+    USER'S REQUEST: 
+    ${userRequest}
+    
+    INSTRUCTIONS:
+    - If there is existing code, modify it based on the user's request.
+    - If no code exists, build it from scratch.
+    - Maintain the same file structure.
+    - Return ONLY the updated JSON object with the 'files' array.
+
+    rules for generating a new project is mentioned below. If there is existing code, use it as a base and modify  it according to the user's request while following the same rules.
     
     RULES:
     1. You MUST provide exactly four files: 'index.html', 'style.css', 'script.js' and 'server.js'

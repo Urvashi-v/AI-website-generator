@@ -17,6 +17,7 @@
     "express": "^5.2.1",
     "mongodb": "^6.21.0",
     "mongoose": "^8.23.0",
-    "prompt-sync": "^4.2.0"
+    "prompt-sync": "^4.2.0",
+    "uuid": "^13.0.0"
   }
 }
