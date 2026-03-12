@@ -27,7 +27,7 @@ async function getAIResponse(userPrompt) {
 
 async function buildApp() {
   console.log("WELCOME TO THE AUTO-WEBSITE GENERATOR");
-  const userRequest = prompt("How can I help ypu? ");
+  const userRequest = prompt("How can I help you? ");
 
   const filesToRead = ['index.html', 'style.css', 'script.js', 'server.js'];
   let existingCode = "";
