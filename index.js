@@ -29,12 +29,17 @@ async function buildApp() {
   console.log("WELCOME TO THE AUTO-WEBSITE GENERATOR");
   const userRequest = prompt("How can I help ypu? ");
 
+  const filesToRead = ['index.html', 'style.css', 'script.js', 'server.js'];
   let existingCode = "";
-  if (fs.existsSync('index.html')) {
-    existingCode = fs.readFileSync('index.html', 'utf8');
-}
+  
+  filesToRead.forEach(file => {
+      if (fs.existsSync(file)) {
+          existingCode += `\n--- FILE: ${file} ---\n${fs.readFileSync(file, 'utf8')}\n`;
+      }
+  });
 
-  const aiPrompt = `
+
+ const aiPrompt = `
     Build a professional, interactive web project for: ${userRequest}.
     You are an Iterative Web Editor.
     EXISTING CODE: 
@@ -97,4 +102,15 @@ async function buildApp() {
   }
 }
 
-buildApp();
+async function run() {
+  while (true) {
+    await buildApp();
+    const cont = prompt("\nApply another change? (y/n): ");
+    if (cont.toLowerCase() !== 'y') {
+      console.log("Goodbye! Happy Coding.");
+      process.exit();
+    }
+  }
+}
+
+run();
