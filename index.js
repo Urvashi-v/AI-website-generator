@@ -26,6 +26,34 @@ async function getAIResponse(userPrompt) {
 }
 
 async function buildApp() {
+
+  const { spawn } = require('child_process');
+  let serverProcess = null; // This holds our running server
+
+  function restartServer() {
+    // 1. Kill the old server if it exists
+    if (serverProcess) {
+        console.log("♻️ Killing old server...");
+        serverProcess.kill();
+    }
+
+    // 2. Start the new server
+    console.log("🚀 Starting updated server...");
+    serverProcess = spawn('node', ['server.js'], { stdio: 'inherit' });
+
+    serverProcess.on('error', (err) => {
+        console.error('Failed to start server:', err);
+    });
+
+    if (serverProcess) {
+    serverProcess.kill();
+    // Give the OS 500ms to clear the port
+    setTimeout(() => {
+        serverProcess = spawn('node', ['server.js'], { stdio: 'inherit' });
+    }, 500);
+    }
+  }
+
   console.log("WELCOME TO THE AUTO-WEBSITE GENERATOR");
   const userRequest = prompt("How can I help you? ");
 
@@ -89,11 +117,16 @@ async function buildApp() {
         
     const cleanJSON = jsonMatch[0];
     const project = JSON.parse(cleanJSON);
-
+    
     project.files.forEach(file => {
     fs.writeFileSync(file.name, file.content);
     console.log(`🛠️ Generated: ${file.name}`);
+    // ... after writing files ...
+    if (fs.existsSync('server.js')) {
+        restartServer();
+    }
     });
+  
 
     console.log("\n PROJECT READY! Check your folder for the new files.");
   } 
